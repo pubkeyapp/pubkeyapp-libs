@@ -1,38 +1,23 @@
+import { Box, Container, Group, Title } from '@mantine/core'
 import { Link, Route, Routes } from 'react-router-dom'
+import { DemoLogo } from './demos/demo-logo'
+import { UiTheme } from './ui-theme'
 
 export function App() {
   return (
-    <>
-      <hr />
-      <div role="navigation">
-        <ul>
-          <li>
+    <UiTheme>
+      <Container>
+        <Box>
+          <Group>
             <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2">Page 2</Link>
-          </li>
-        </ul>
-      </div>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div>
-              This is the generated root route. <Link to="/page-2">Click here for page 2.</Link>
-            </div>
-          }
-        />
-        <Route
-          path="/page-2"
-          element={
-            <div>
-              <Link to="/">Click here to go back to root page.</Link>
-            </div>
-          }
-        />
-      </Routes>
-      {/* END: routes */}
-    </>
+            <Link to="/logo">Logo</Link>
+          </Group>
+        </Box>
+        <Routes>
+          <Route path="/" element={<Title>Home</Title>} />
+          <Route path="/logo" element={<DemoLogo />} />
+        </Routes>
+      </Container>
+    </UiTheme>
   )
 }
