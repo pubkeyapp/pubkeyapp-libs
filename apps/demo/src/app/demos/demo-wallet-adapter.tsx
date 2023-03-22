@@ -1,4 +1,4 @@
-import { Group, Stack, Title } from '@mantine/core'
+import { Group, Stack, Switch, Title } from '@mantine/core'
 import {
   WalletConnectButton,
   WalletDisconnectButton,
@@ -8,15 +8,22 @@ import {
 } from '@pubkeyapp/wallet-adapter-mantine-ui'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
 import { clusterApiUrl } from '@solana/web3.js'
+import { useState } from 'react'
 
 export function DemoWalletAdapter() {
+  const [autoConnect, setAutoConnect] = useState(true)
   const endpoint = clusterApiUrl('devnet')
   return (
     <ConnectionProvider endpoint={endpoint}>
-      <WalletProvider wallets={[]} autoConnect>
+      <WalletProvider wallets={[]} autoConnect={autoConnect}>
         <WalletModalProvider radius="xl">
           <Stack>
             <Title>@pubkeyapp/wallet-adapter-mantine-ui</Title>
+            <Switch
+              label="Auto connect"
+              checked={autoConnect}
+              onChange={(event) => setAutoConnect(event.currentTarget.checked)}
+            />
             <Group>
               <WalletConnectButton />
               <WalletDisconnectButton />
