@@ -1,6 +1,5 @@
 import { Box, Container, Group, Title } from '@mantine/core'
 import { Link, Route, Routes } from 'react-router-dom'
-import { WalletModalProvider } from '@pubkeyapp/wallet-adapter-mantine-ui'
 import { DemoLogo } from './demos/demo-logo'
 import { DemoWalletAdapter } from './demos/demo-wallet-adapter'
 import { UiTheme } from './ui-theme'

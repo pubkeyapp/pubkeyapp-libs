@@ -3,7 +3,7 @@
   "npmScope": "pubkeyapp",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx-cloud",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "NzlmZjU5OTYtZjdlYi00ZmEzLTk2ZjQtZDRlZTUxNmE2ZmFifHJlYWQtd3JpdGU="
@@ -22,7 +22,7 @@
     }
   },
   "generators": {
-    "@nrwl/react": {
+    "@nx/react": {
       "application": {
         "style": "css",
         "linter": "eslint",
