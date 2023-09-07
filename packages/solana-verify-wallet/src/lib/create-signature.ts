@@ -1,5 +1,4 @@
-import { AnchorWallet } from '@solana/wallet-adapter-react'
-import { Connection, PublicKey, Transaction, TransactionInstruction } from '@solana/web3.js'
+import { Connection, PublicKey, Transaction, TransactionInstruction, VersionedTransaction } from '@solana/web3.js'
 import * as bs58 from 'bs58'
 import { sign } from 'tweetnacl'
 import { MEMO_PROGRAM_ID } from './constants'
@@ -9,15 +8,15 @@ export interface CreateSignature {
   connection?: Connection
   publicKey: string
   signMessage?: (message: Uint8Array) => Promise<Uint8Array>
+  signTransaction?: (transaction: Transaction | VersionedTransaction) => Promise<Transaction | VersionedTransaction>
   useLedger: boolean
-  wallet?: AnchorWallet
 }
 
 export interface CreateSignatureLedger {
   challenge: string
   publicKey: string
   connection: Connection
-  wallet: AnchorWallet
+  signTransaction: (transaction: Transaction | VersionedTransaction) => Promise<Transaction | VersionedTransaction>
 }
 
 export interface CreateSignatureWallet {
@@ -30,7 +29,7 @@ async function createSignatureLedger({
   challenge,
   connection,
   publicKey,
-  wallet,
+  signTransaction,
 }: CreateSignatureLedger): Promise<string> {
   const tx = new Transaction()
   tx.add(
@@ -45,7 +44,7 @@ async function createSignatureLedger({
   const { blockhash } = await connection.getLatestBlockhash()
   tx.recentBlockhash = blockhash
 
-  const signedTx = await wallet.signTransaction(tx)
+  const signedTx = await signTransaction(tx)
   if (!signedTx) throw new Error('No signedTx')
   return signedTx.serialize().toString('hex')
 }
@@ -66,16 +65,16 @@ export async function createSignature({
   publicKey,
   signMessage,
   useLedger,
-  wallet,
+  signTransaction,
 }: CreateSignature) {
   if (useLedger) {
-    if (!wallet) {
-      return Promise.reject('No anchor wallet')
+    if (!signTransaction) {
+      return Promise.reject('No sign transaction')
     }
     if (!connection) {
       return Promise.reject('No connection')
     }
-    return createSignatureLedger({ challenge, publicKey, connection, wallet })
+    return createSignatureLedger({ challenge, publicKey, connection, signTransaction })
   } else {
     if (!signMessage) {
       return Promise.reject('No sign message')
