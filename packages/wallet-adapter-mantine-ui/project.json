@@ -20,7 +20,7 @@
         "tsConfig": "packages/wallet-adapter-mantine-ui/tsconfig.lib.json",
         "project": "packages/wallet-adapter-mantine-ui/package.json",
         "entryFile": "packages/wallet-adapter-mantine-ui/src/index.ts",
-        "external": ["react/jsx-runtime"],
+        "external": ["react/jsx-runtime", "core-js"],
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "compiler": "babel",
         "assets": [
