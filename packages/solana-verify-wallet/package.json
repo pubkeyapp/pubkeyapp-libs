@@ -1,8 +1,9 @@
 {
   "name": "@pubkeyapp/solana-verify-wallet",
-  "version": "0.0.1",
+  "version": "1.3.0",
   "dependencies": {},
   "type": "commonjs",
   "main": "./index.cjs",
-  "module": "./index.js"
+  "module": "./index.js",
+  "license": "MIT"
 }
