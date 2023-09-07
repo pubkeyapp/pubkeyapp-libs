@@ -1,6 +1,6 @@
 {
   "name": "@pubkeyapp/wallet-adapter-mantine-ui",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "license": "MIT",
   "peerDependencies": {
     "@mantine/core": "^6.0.0",
