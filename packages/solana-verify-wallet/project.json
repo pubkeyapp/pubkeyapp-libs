@@ -1,0 +1,44 @@
+{
+  "name": "solana-verify-wallet",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/solana-verify-wallet/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/solana-verify-wallet",
+        "main": "packages/solana-verify-wallet/src/index.ts",
+        "tsConfig": "packages/solana-verify-wallet/tsconfig.lib.json",
+        "assets": [],
+        "project": "packages/solana-verify-wallet/package.json",
+        "compiler": "swc",
+        "format": ["cjs", "esm"],
+        "external": "all"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/solana-verify-wallet/**/*.ts", "packages/solana-verify-wallet/package.json"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/solana-verify-wallet/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}
